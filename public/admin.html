@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – CivicQueue</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Admin Panel</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="queue.html">Live Tracker</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Queue Management</h2>
+
+    <label for="admin-dept">Department</label>
+    <select id="admin-dept">
+      <option value="passport">Passport</option>
+      <option value="license">Driving License</option>
+      <option value="property">Property Registration</option>
+    </select>
+
+    <div style="margin-top: 1em;">
+      <button onclick="pauseQueue()">Pause Queue</button>
+      <button onclick="resumeQueue()">Resume Queue</button>
+      <button onclick="clearQueue()">Clear All Tickets</button>
+    </div>
+
+    <p id="admin-status" style="color: green; font-weight: bold; margin-top: 1em;"></p>
+  </main>
+
+  <footer>
+    <p>© 2025 CivicQueue. Admin tools for better service.</p>
+  </footer>
+
+  <script>
+    function pauseQueue() {
+      const dept = document.getElementById('admin-dept').value;
+      fetch(`/api/pause/${dept}`, { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('admin-status').innerText = `${dept} queue paused`;
+        });
+    }
+
+    function resumeQueue() {
+      const dept = document.getElementById('admin-dept').value;
+      fetch(`/api/resume/${dept}`, { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('admin-status').innerText = `${dept} queue resumed`;
+        });
+    }
+
+    function clearQueue() {
+      const dept = document.getElementById('admin-dept').value;
+      fetch(`/api/clear/${dept}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('admin-status').innerText = `${dept} queue cleared`;
+        });
+    }
+  </script>
+</body>
+</html>
