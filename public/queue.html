@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CivicQueue – Live Tracker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>CivicQueue</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="queue.html" class="active">Live Tracker</a></li>
+        <li><a href="admin.html">Admin Panel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Live Queue Tracker</h2>
+
+      <label for="branch">Select Branch</label>
+      <select id="branch">
+        <option value="koramangala">Koramangala</option>
+        <option value="indiranagar">Indiranagar</option>
+      </select>
+
+      <label for="department">Select Department</label>
+      <select id="department">
+        <option value="passport">Passport</option>
+        <option value="license">Driving License</option>
+        <option value="property">Property Registration</option>
+      </select>
+
+      <section id="queue-status">
+        <h3>Queue Status</h3>
+        <p id="people">–</p>
+        <p id="wait">–</p>
+        <p id="peak-time">Peak Time: --</p>
+        <p id="pause-info" style="color:red;font-weight:bold;"></p>
+      </section>
+
+      <section id="ticket-booking">
+        <h3>Book Your Ticket</h3>
+        <input type="text" id="username" placeholder="Enter your name" />
+        
+        <label>
+          <input type="checkbox" id="priority" />
+          Senior citizen / differently abled
+        </label>
+
+        <label for="slot">Choose Time Slot</label>
+        <select id="slot">
+          <option value="9-10">9:00 AM – 10:00 AM</option>
+          <option value="10-11">10:00 AM – 11:00 AM</option>
+          <option value="11-12">11:00 AM – 12:00 PM</option>
+          <option value="2-3">2:00 PM – 3:00 PM</option>
+        </select>
+
+        <div id="checklist"></div>
+        <button id="get-ticket">Book Ticket</button>
+        <div id="ticket-info"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 CivicQueue. Real-time civic convenience.</p>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/queue.js"></script>
+</body>
+</html>
